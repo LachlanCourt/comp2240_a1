@@ -44,11 +44,12 @@ public class A1
         FBV processorFBV = new FBV();
         algorithms.add(processorFBV);
         // LTR
-//        LTR processorLTR = new LTR();
-//        algorithms.add(processorLTR);
+        //        LTR processorLTR = new LTR();
+        //        algorithms.add(processorLTR);
 
 
-        for (Algorithm a : algorithms) {
+        for (Algorithm a : algorithms)
+        {
             readData(args[0]);
             a.loadProcesses(processes);
             a.run();
@@ -144,12 +145,14 @@ public class A1
     public String getReport(ArrayList<Algorithm> algorithms)
     {
         String report = "";
-        for (Algorithm a : algorithms) {
+        for (Algorithm a : algorithms)
+        {
             report += a.reportFull();
         }
 
         report += "\nSummary\nAlgorithm  Average Turnaround Time  Waiting Time\n";
-        for (Algorithm a : algorithms) {
+        for (Algorithm a : algorithms)
+        {
             report += a.reportAvg();
         }
         return report;

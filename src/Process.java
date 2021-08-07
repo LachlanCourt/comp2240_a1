@@ -7,7 +7,7 @@ public class Process
     private int execSize;
     private int tickets;
     private int remainingTime;
-    private int lowPriorityTime; // FBV
+    private int lowPriorityTime;  // FBV
 
     private ArrayList<ProcessEvent> processHistory;
 

@@ -12,21 +12,24 @@ public class FBV extends Algorithm
     {
         name = "FBV";
         processQueues = new ArrayList<>();
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 4; i++)
+        {
             Queue<Process> newQueue = new LinkedList<>();
             processQueues.add(newQueue);
         }
-        timeQuanta = new ArrayList<>(Arrays.asList(new Integer[]{1, 2, 4, 4}));
+        timeQuanta = new ArrayList<>(Arrays.asList(new Integer[] {1, 2, 4, 4}));
     }
 
-    @Override
-    protected int getNextProcess() {
+    @Override protected int getNextProcess()
+    {
         Queue<Process> lowPriorityQueue = processQueues.get(processQueues.size() - 1);
         int size = lowPriorityQueue.size();
-        for (int i = 0; i < size; i++) {
+        for (int i = 0; i < size; i++)
+        {
             Process temp = lowPriorityQueue.remove();
-            if (currentTime - temp.getLowPriorityTime() > 32) {
-                processQueues.get(0).add(temp); // Jump back up to the top if the process has been there for too long
+            if (currentTime - temp.getLowPriorityTime() > 32)
+            {
+                processQueues.get(0).add(temp);  // Jump back up to the top if the process has been there for too long
             }
             else
             {
@@ -43,8 +46,8 @@ public class FBV extends Algorithm
         return 0;
     }
 
-    @Override
-    protected void run() {
+    @Override protected void run()
+    {
         currentTime = 0;
         Process currentProcess;
         addNewProcesses();
@@ -85,14 +88,13 @@ public class FBV extends Algorithm
                 }
                 else
                 {
-                    processQueues.get(processQueues.size() - 1).add(currentProcess); // Round robin
+                    processQueues.get(processQueues.size() - 1).add(currentProcess);  // Round robin
                 }
             }
         }
     }
 
-    @Override
-    protected void addNewProcesses()
+    @Override protected void addNewProcesses()
     {
         Process p;
         while ((upcomingProcessList.size() > 0) && (upcomingProcessList.get(0).getArrive() <= currentTime))
