@@ -24,45 +24,48 @@ public class A1
 
     public void run(String[] args)
     {
-        randomValues = new ArrayList<>();
-        processes = new ArrayList<>();
+
         if (!readData(args[0]))
         {
             System.out.println("Error loading text file! Terminating");
             System.exit(-2);
         }
+
+        ArrayList<Algorithm> algorithms = new ArrayList<>();
+
         // FCFS
         FCFS processorFCFS = new FCFS();
         processorFCFS.setDISP(DISP);
-        processorFCFS.loadProcesses(processes);
-        processorFCFS.run();
-
-        randomValues = new ArrayList<>();
-        processes = new ArrayList<>();
-        readData(args[0]);
-
+        algorithms.add(processorFCFS);
         // SRT
         SRT processorSRT = new SRT();
-        processorSRT.loadProcesses(processes);
-        processorSRT.run();
-
+        algorithms.add(processorSRT);
         // FBV
-        //        FBV processorFBV = new FBV();
-        //        processorFBV.loadProcesses(processes);
-        //        processorFBV.run();
-
+        FBV processorFBV = new FBV();
+        algorithms.add(processorFBV);
         // LTR
         //        LTR processorLTR = new LTR();
-        //        processorLTR.loadProcesses(processes);
-        //        processorLTR.run();
+        //        algorithms.add(processorLTR);
 
-        String report = getReport(processorFCFS, processorSRT);
+
+        for (Algorithm a : algorithms)
+        {
+            readData(args[0]);
+            a.loadProcesses(processes);
+            a.run();
+        }
+
+
+        String report = getReport(algorithms);
         System.out.println(report);
     }
 
 
     public boolean readData(String filename)
     {
+        randomValues = new ArrayList<>();
+        processes = new ArrayList<>();
+
         // Declare Scanner to read from the file
         Scanner input;
         try
@@ -139,18 +142,19 @@ public class A1
         return false;
     }
 
-    public String getReport(Algorithm processorFCFS, Algorithm processorSRT)
+    public String getReport(ArrayList<Algorithm> algorithms)
     {
         String report = "";
-        report += processorFCFS.reportFull();
-        report += processorSRT.reportFull();
-        // FBV report full
-        // LTR report full
+        for (Algorithm a : algorithms)
+        {
+            report += a.reportFull();
+        }
+
         report += "\nSummary\nAlgorithm  Average Turnaround Time  Waiting Time\n";
-        report += processorFCFS.reportAvg();
-        report += processorSRT.reportAvg();
-        // FBV report avg
-        // LTR report avg
+        for (Algorithm a : algorithms)
+        {
+            report += a.reportAvg();
+        }
         return report;
     }
 }
