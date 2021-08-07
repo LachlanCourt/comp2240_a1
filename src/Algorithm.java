@@ -5,8 +5,8 @@ public abstract class Algorithm
     protected static int DISP;
     protected ArrayList<Process> processList;
     protected ArrayList<Process> totalProcesses;
-    protected ArrayList<Process> unfinishedProcesses;
-    protected ArrayList<Process> finishedProcesses;
+    protected ArrayList<Process> unfinishedProcesses = new ArrayList<>();
+    protected ArrayList<Process> finishedProcesses = new ArrayList<>();
     protected int currentTime;
 
     public abstract void run();
@@ -28,13 +28,12 @@ public abstract class Algorithm
 
     protected void addNewProcesses()
     {
-        for (Process p : processList)
+        Process p;
+        while ((processList.size() > 0) && (processList.get(0).getArrive() <= currentTime))
         {
-            if (currentTime >= p.getArrive())
-            {
-                unfinishedProcesses.add(p);
-                processList.remove(p);
-            }
+            p = processList.get(0);
+            unfinishedProcesses.add(p);
+            processList.remove(p);
         }
     }
 }
