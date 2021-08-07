@@ -9,8 +9,23 @@ public abstract class Algorithm {
     protected int currentTime;
     protected String name = "";
 
-    public abstract void run();
     protected abstract int getNextProcess();
+
+    public void run()
+    {
+        currentTime = 0;
+        Process currentProcess;
+        addNewProcesses();
+        while (unfinishedProcesses.size() > 0) {
+            currentTime += DISP;
+            currentProcess = unfinishedProcesses.get(getNextProcess());
+            currentProcess.addEvent(new ProcessEvent(currentTime, currentTime + currentProcess.getExecSize()));
+            currentTime += currentProcess.getExecSize();
+            unfinishedProcesses.remove(0);
+            finishedProcesses.add(currentProcess);
+            addNewProcesses();
+        }
+    }
 
     public String reportFull()
     {
@@ -30,7 +45,23 @@ public abstract class Algorithm {
 
     public String reportAvg()
     {
-        String report = "";
+        String report = name + " ".repeat(11-name.length());
+
+        double totalTurnaround = 0;
+        double totalWaiting = 0;
+
+        for (Process p : finishedProcesses)
+        {
+            totalTurnaround += p.getTurnaround();
+            totalWaiting += p.getWaiting();
+        }
+
+        String avgTurnaround = String.format("%2.2f", totalTurnaround / finishedProcesses.size());
+        report += avgTurnaround + " ".repeat(25 - avgTurnaround.length());
+
+        String avgWaiting = String.format("%2.2f", totalWaiting / finishedProcesses.size());
+        report += avgWaiting + " ".repeat(25 - avgWaiting.length());
+
         return report;
     }
 

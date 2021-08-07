@@ -67,13 +67,13 @@ public class Process
         return report;
     }
 
-    private int getTurnaround()
+    public int getTurnaround()
     {
         int endTime = processHistory.get(processHistory.size() - 1).getEndTime();
         return endTime - arrive;
     }
 
-    private int getWaiting()
+    public int getWaiting()
     {
         int waitingTime = 0;
         int lastFinishTime = arrive;
