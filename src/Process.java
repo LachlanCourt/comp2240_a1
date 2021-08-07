@@ -29,19 +29,23 @@ public class Process
         return processHistory;
     }
 
-    public String getId() {
+    public String getId()
+    {
         return id;
     }
 
-    public int getArrive() {
+    public int getArrive()
+    {
         return arrive;
     }
 
-    public int getExecSize() {
+    public int getExecSize()
+    {
         return execSize;
     }
 
-    public int getTickets() {
+    public int getTickets()
+    {
         return tickets;
     }
 }

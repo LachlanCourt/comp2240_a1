@@ -37,19 +37,19 @@ public class A1
         processorFCFS.run();
 
         // SRT
-//        SRT processorSRT = new SRT();
-//        processorSRT.loadProcesses(processes);
-//        processorSRT.run();
+        //        SRT processorSRT = new SRT();
+        //        processorSRT.loadProcesses(processes);
+        //        processorSRT.run();
 
         // FBV
-//        FBV processorFBV = new FBV();
-//        processorFBV.loadProcesses(processes);
-//        processorFBV.run();
+        //        FBV processorFBV = new FBV();
+        //        processorFBV.loadProcesses(processes);
+        //        processorFBV.run();
 
         // LTR
-//        LTR processorLTR = new LTR();
-//        processorLTR.loadProcesses(processes);
-//        processorLTR.run();        
+        //        LTR processorLTR = new LTR();
+        //        processorLTR.loadProcesses(processes);
+        //        processorLTR.run();
 
         String report = getReport(processorFCFS);
         System.out.println(report);

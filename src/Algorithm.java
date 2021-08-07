@@ -31,6 +31,7 @@ public abstract class Algorithm
         Process p;
         while ((processList.size() > 0) && (processList.get(0).getArrive() <= currentTime))
         {
+            System.out.println("Adding Process. Current Time:" + currentTime);
             p = processList.get(0);
             unfinishedProcesses.add(p);
             processList.remove(p);

@@ -9,11 +9,13 @@ public class ProcessEvent
         endTime = endTime_;
     }
 
-    public int getStartTime() {
+    public int getStartTime()
+    {
         return startTime;
     }
 
-    public int getEndTime() {
+    public int getEndTime()
+    {
         return endTime;
     }
 }
