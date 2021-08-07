@@ -11,23 +11,7 @@ public abstract class Algorithm
     protected String name = "";
 
     protected abstract int getNextProcess();
-
-    public void run()
-    {
-        currentTime = 0;
-        Process currentProcess;
-        addNewProcesses();
-        while (unfinishedProcesses.size() > 0)
-        {
-            currentTime += DISP;
-            currentProcess = unfinishedProcesses.get(getNextProcess());
-            currentProcess.addEvent(new ProcessEvent(currentTime, currentTime + currentProcess.getExecSize()));
-            currentTime += currentProcess.getExecSize();
-            unfinishedProcesses.remove(0);
-            finishedProcesses.add(currentProcess);
-            addNewProcesses();
-        }
-    }
+    protected abstract void run();
 
     public String reportFull()
     {
@@ -38,7 +22,7 @@ public abstract class Algorithm
             report += "T" + startTime + ": " + p.getId() + "\n";
         }
         report += "\nProcess  Turnaround Time  Waiting Time\n";
-        for (Process p : finishedProcesses)
+        for (Process p : totalProcesses) // Print in read order, not in process finish order
         {
             report += p.reportFull();
         }
