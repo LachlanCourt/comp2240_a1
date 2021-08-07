@@ -44,8 +44,8 @@ public class A1
         FBV processorFBV = new FBV();
         algorithms.add(processorFBV);
         // LTR
-        //        LTR processorLTR = new LTR();
-        //        algorithms.add(processorLTR);
+        LTR processorLTR = new LTR();
+        algorithms.add(processorLTR);
 
 
         for (Algorithm a : algorithms)
