@@ -6,8 +6,8 @@ import java.util.*;
 public class A1
 {
     private static int DISP;
-    private ArrayList<Integer> randomValues;
-    private ArrayList<Process> processes;
+    private ArrayList<Integer> randomValues = new ArrayList<>();
+    private ArrayList<Process> processes = new ArrayList<>();
 
 
     // Main function
@@ -67,7 +67,13 @@ public class A1
         int tempTickets = 0;
         while (input.hasNext())
         {
-            line = input.nextLine();
+            do
+            {
+                System.out.println("heh");
+                line = input.nextLine();
+            } while (line == null);  // Jump over newlines
+
+            System.out.println(line);
             if (line.startsWith(("DISP:")))
             {
                 DISP = Integer.valueOf(line.substring(6));
@@ -93,8 +99,11 @@ public class A1
             }
             else if (line.startsWith(("END")) && (readingProcesses))
             {
+                System.out.println("1");
                 Process newProcess = new Process(tempID, tempArrive, tempExecSize, tempTickets);
+                System.out.println("2");
                 processes.add(newProcess);
+                System.out.println("3");
             }
             else if (line.startsWith(("BEGINRANDOM")))
             {
