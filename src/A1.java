@@ -37,9 +37,9 @@ public class A1
         processorFCFS.run();
 
         // SRT
-        //        SRT processorSRT = new SRT();
-        //        processorSRT.loadProcesses(processes);
-        //        processorSRT.run();
+        SRT processorSRT = new SRT();
+        processorSRT.loadProcesses(processes);
+        processorSRT.run();
 
         // FBV
         //        FBV processorFBV = new FBV();
@@ -51,7 +51,7 @@ public class A1
         //        processorLTR.loadProcesses(processes);
         //        processorLTR.run();
 
-        String report = getReport(processorFCFS);
+        String report = getReport(processorFCFS, processorSRT);
         System.out.println(report);
     }
 
@@ -134,16 +134,16 @@ public class A1
         return false;
     }
 
-    public String getReport(Algorithm processorFCFS)
+    public String getReport(Algorithm processorFCFS, Algorithm processorSRT)
     {
         String report = "";
         report += processorFCFS.reportFull();
-        // SRT report full
+        report += processorSRT.reportFull();
         // FBV report full
         // LTR report full
         report += "\nSummary\nAlgorithm  Average Turnaround Time  Waiting Time\n";
         report += processorFCFS.reportAvg();
-        // SRT report avg
+        report += processorSRT.reportAvg();
         // FBV report avg
         // LTR report avg
         return report;
