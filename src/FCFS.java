@@ -11,6 +11,7 @@ public class FCFS extends Algorithm
         {
             currentTime += DISP;
             currentProcess = unfinishedProcesses.get(getNextProcess());
+            currentProcess.addEvent(new ProcessEvent(currentTime, currentTime + currentProcess.getExecSize()));
             currentTime += currentProcess.getExecSize();
             unfinishedProcesses.remove(0);
             finishedProcesses.add(currentProcess);

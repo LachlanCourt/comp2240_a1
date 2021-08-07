@@ -35,11 +35,21 @@ public class A1
         processorFCFS.setDISP(DISP);
         processorFCFS.loadProcesses(processes);
         processorFCFS.run();
+
         // SRT
+//        SRT processorSRT = new SRT();
+//        processorSRT.loadProcesses(processes);
+//        processorSRT.run();
 
         // FBV
+//        FBV processorFBV = new FBV();
+//        processorFBV.loadProcesses(processes);
+//        processorFBV.run();
 
         // LTR
+//        LTR processorLTR = new LTR();
+//        processorLTR.loadProcesses(processes);
+//        processorLTR.run();        
 
         String report = getReport(processorFCFS);
         System.out.println(report);
