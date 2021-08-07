@@ -48,4 +48,30 @@ public class Process
     {
         return tickets;
     }
+
+    public String reportFull()
+    {
+        String report = "";
+
+        // ID
+        report += id + " ".repeat(9 - id.length());
+
+        // Turnaround Time
+        int endTime = processHistory.get(processHistory.size() - 1).getEndTime();
+        String turnaroundTime = String.valueOf(endTime - arrive);
+        report += turnaroundTime + " ".repeat(17 - turnaroundTime.length());
+
+        // Waiting Time
+        int waitingTime = 0;
+        int lastFinishTime = arrive;
+        for (ProcessEvent p : processHistory)
+        {
+            waitingTime += p.getStartTime() - lastFinishTime;
+            lastFinishTime = p.getEndTime();
+        }
+        String waitingStr = String.valueOf(waitingTime);
+        report += waitingStr + "\n";
+
+        return report;
+    }
 }

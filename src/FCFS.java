@@ -32,27 +32,7 @@ public class FCFS extends Algorithm
         report += "\nProcess  Turnaround Time  Waiting Time\n";
         for (Process p : finishedProcesses)
         {
-            ArrayList<ProcessEvent> eventList = p.getEvents();
-
-            // ID
-            String id = p.getId();
-            report += id + " ".repeat(9 - id.length());
-
-            // Turnaround Time
-            int endTime = eventList.get(eventList.size() - 1).getEndTime();
-            String turnaroundTime = String.valueOf(endTime - p.getArrive());
-            report += turnaroundTime + " ".repeat(17 - turnaroundTime.length());
-
-            // Waiting Time
-            int waitingTime = 0;
-            int lastFinishTime = p.getArrive();
-            for (ProcessEvent q : eventList)
-            {
-                waitingTime += q.getStartTime() - lastFinishTime;
-                lastFinishTime = q.getEndTime();
-            }
-            String waitingStr = String.valueOf(waitingTime);
-            report += waitingStr + "\n";
+            report += p.reportFull();
         }
         return report;
     }
