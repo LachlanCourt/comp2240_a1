@@ -5,6 +5,10 @@ import java.util.*;
 
 public class A1
 {
+    private static int DISP;
+    private ArrayList<Integer> randomValues;
+
+
     // Main function
     public static void main(String[] args)
     {
@@ -53,9 +57,19 @@ public class A1
             return false;
         }
 
+        String line;
         while (input.hasNext())
         {
-            System.out.println(input.next());
+            line = input.nextLine();
+            if (line.startsWith(("DISP:")))
+            {
+                System.out.println(line);
+                DISP = Integer.valueOf(line.substring(6));
+                System.out.println("Disp is " + DISP);
+            }
+            else {
+                //System.out.println(input.next());
+            }
         }
         return true;
     }
