@@ -1,11 +1,11 @@
 public class Process
 {
-    private int id;
+    private String id;
     private int time;
     private int execSize;
     private int tickets;
 
-    public Process(int id_, int time_, int execSize_, int tickets_)
+    public Process(String id_, int time_, int execSize_, int tickets_)
     {
         id = id_;
         time = time_;
