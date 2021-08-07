@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 
-public abstract class Algorithm {
+public abstract class Algorithm
+{
     protected static int DISP;
     protected ArrayList<Process> processList;
     protected ArrayList<Process> totalProcesses;
@@ -16,7 +17,8 @@ public abstract class Algorithm {
         currentTime = 0;
         Process currentProcess;
         addNewProcesses();
-        while (unfinishedProcesses.size() > 0) {
+        while (unfinishedProcesses.size() > 0)
+        {
             currentTime += DISP;
             currentProcess = unfinishedProcesses.get(getNextProcess());
             currentProcess.addEvent(new ProcessEvent(currentTime, currentTime + currentProcess.getExecSize()));
@@ -45,7 +47,7 @@ public abstract class Algorithm {
 
     public String reportAvg()
     {
-        String report = name + " ".repeat(11-name.length());
+        String report = name + " ".repeat(11 - name.length());
 
         double totalTurnaround = 0;
         double totalWaiting = 0;
