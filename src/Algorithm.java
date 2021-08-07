@@ -23,7 +23,7 @@ public abstract class Algorithm
             report += "T" + startTime + ": " + p.getProcessID() + "\n";
         }
         report += "\nProcess  Turnaround Time  Waiting Time\n";
-        for (Process p : totalProcesses) // Print in read order, not in process finish order
+        for (Process p : totalProcesses)  // Print in read order, not in process finish order
         {
             report += p.reportFull();
         }

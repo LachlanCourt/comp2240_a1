@@ -5,8 +5,7 @@ public class SRT extends Algorithm
         name = "SRT";
     }
 
-    @Override
-    public void run()
+    @Override public void run()
     {
         currentTime = 0;
         Process currentProcess;

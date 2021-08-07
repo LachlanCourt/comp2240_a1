@@ -7,8 +7,7 @@ public class FCFS extends Algorithm
         name = "FCFS";
     }
 
-    @Override
-    public void run()
+    @Override public void run()
     {
         currentTime = 0;
         Process currentProcess;
@@ -17,7 +16,8 @@ public class FCFS extends Algorithm
         {
             currentTime += DISP;
             currentProcess = unfinishedProcesses.get(getNextProcess());
-            ProcessEvent event = new ProcessEvent(currentTime, currentTime + currentProcess.getRemainingTime(), currentProcess.getId());
+            ProcessEvent event =
+                new ProcessEvent(currentTime, currentTime + currentProcess.getRemainingTime(), currentProcess.getId());
             currentProcess.addEvent(event);
             currentTime += currentProcess.getRemainingTime();
             unfinishedProcesses.remove(currentProcess);

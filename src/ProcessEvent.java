@@ -21,7 +21,8 @@ public class ProcessEvent
         return endTime;
     }
 
-    public String getProcessID() {
+    public String getProcessID()
+    {
         return processID;
     }
 }
