@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public abstract class Algorithm
 {
     protected static int DISP;
-    protected ArrayList<Process> processList;
+    protected ArrayList<Process> upcomingProcessList;
     protected ArrayList<Process> totalProcesses;
     protected ArrayList<Process> unfinishedProcesses = new ArrayList<>();
     protected ArrayList<Process> finishedProcesses = new ArrayList<>();
@@ -31,7 +31,7 @@ public abstract class Algorithm
 
     public String reportFull()
     {
-        String report = name + "\n";
+        String report = "\n" + name + "\n";
         for (Process p : finishedProcesses)
         {
             int startTime = p.getEvents().get(0).getStartTime();
@@ -62,7 +62,7 @@ public abstract class Algorithm
         report += avgTurnaround + " ".repeat(25 - avgTurnaround.length());
 
         String avgWaiting = String.format("%2.2f", totalWaiting / finishedProcesses.size());
-        report += avgWaiting + " ".repeat(25 - avgWaiting.length());
+        report += avgWaiting + " ".repeat(25 - avgWaiting.length()) + "\n";
 
         return report;
     }
@@ -74,18 +74,18 @@ public abstract class Algorithm
 
     public void loadProcesses(ArrayList<Process> processes_)
     {
-        processList = new ArrayList<>(processes_);
+        upcomingProcessList = new ArrayList<>(processes_);
         totalProcesses = new ArrayList<>(processes_);
     }
 
     protected void addNewProcesses()
     {
         Process p;
-        while ((processList.size() > 0) && (processList.get(0).getArrive() <= currentTime))
+        while ((upcomingProcessList.size() > 0) && (upcomingProcessList.get(0).getArrive() <= currentTime))
         {
-            p = processList.get(0);
+            p = upcomingProcessList.get(0);
             unfinishedProcesses.add(p);
-            processList.remove(p);
+            upcomingProcessList.remove(p);
         }
     }
 }

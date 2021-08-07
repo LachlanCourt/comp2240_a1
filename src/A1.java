@@ -6,9 +6,8 @@ import java.util.*;
 public class A1
 {
     private static int DISP;
-    private ArrayList<Integer> randomValues = new ArrayList<>();
-    private ArrayList<Process> processes = new ArrayList<>();
-
+    private ArrayList<Integer> randomValues;
+    private ArrayList<Process> processes;
 
     // Main function
     public static void main(String[] args)
@@ -25,6 +24,8 @@ public class A1
 
     public void run(String[] args)
     {
+        randomValues = new ArrayList<>();
+        processes = new ArrayList<>();
         if (!readData(args[0]))
         {
             System.out.println("Error loading text file! Terminating");
@@ -35,6 +36,10 @@ public class A1
         processorFCFS.setDISP(DISP);
         processorFCFS.loadProcesses(processes);
         processorFCFS.run();
+
+        randomValues = new ArrayList<>();
+        processes = new ArrayList<>();
+        readData(args[0]);
 
         // SRT
         SRT processorSRT = new SRT();
