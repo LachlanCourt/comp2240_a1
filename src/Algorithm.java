@@ -7,6 +7,7 @@ public abstract class Algorithm
     protected ArrayList<Process> totalProcesses;
     protected ArrayList<Process> unfinishedProcesses = new ArrayList<>();
     protected ArrayList<Process> finishedProcesses = new ArrayList<>();
+    protected ArrayList<ProcessEvent> processEventRecord = new ArrayList<>();
     protected int currentTime;
     protected String name = "";
 
@@ -16,10 +17,10 @@ public abstract class Algorithm
     public String reportFull()
     {
         String report = "\n" + name + "\n";
-        for (Process p : finishedProcesses)
+        for (ProcessEvent p : processEventRecord)
         {
-            int startTime = p.getEvents().get(0).getStartTime();
-            report += "T" + startTime + ": " + p.getId() + "\n";
+            int startTime = p.getStartTime();
+            report += "T" + startTime + ": " + p.getProcessID() + "\n";
         }
         report += "\nProcess  Turnaround Time  Waiting Time\n";
         for (Process p : totalProcesses) // Print in read order, not in process finish order

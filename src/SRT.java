@@ -19,7 +19,6 @@ public class SRT extends Algorithm
             int startTime = currentTime;
             while (getNextProcess() == nextProcessIndex)
             {
-                System.out.println(unfinishedProcesses.size());
                 currentTime++;
                 currentProcess.decRemainingTime();
                 if (currentProcess.getRemainingTime() == 0)
@@ -30,7 +29,9 @@ public class SRT extends Algorithm
                 }
                 addNewProcesses();
             }
-            currentProcess.addEvent(new ProcessEvent(startTime, currentTime));
+            ProcessEvent event = new ProcessEvent(startTime, currentTime, currentProcess.getId());
+            currentProcess.addEvent(event);
+            processEventRecord.add(event);
         }
     }
 
@@ -46,7 +47,6 @@ public class SRT extends Algorithm
                 shortestIndex = i;
             }
         }
-        System.out.println(shortestIndex);
         return shortestIndex;
     }
 }

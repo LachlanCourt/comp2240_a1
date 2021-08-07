@@ -2,11 +2,13 @@ public class ProcessEvent
 {
     private int startTime;
     private int endTime;
+    private String processID;
 
-    public ProcessEvent(int startTime_, int endTime_)
+    public ProcessEvent(int startTime_, int endTime_, String id_)
     {
         startTime = startTime_;
         endTime = endTime_;
+        processID = id_;
     }
 
     public int getStartTime()
@@ -17,5 +19,9 @@ public class ProcessEvent
     public int getEndTime()
     {
         return endTime;
+    }
+
+    public String getProcessID() {
+        return processID;
     }
 }
