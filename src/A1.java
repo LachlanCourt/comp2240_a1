@@ -67,13 +67,8 @@ public class A1
         int tempTickets = 0;
         while (input.hasNext())
         {
-            do
-            {
-                System.out.println("heh");
-                line = input.nextLine();
-            } while (line == null);  // Jump over newlines
+            line = input.nextLine();
 
-            System.out.println(line);
             if (line.startsWith(("DISP:")))
             {
                 DISP = Integer.valueOf(line.substring(6));
@@ -99,11 +94,8 @@ public class A1
             }
             else if (line.startsWith(("END")) && (readingProcesses))
             {
-                System.out.println("1");
                 Process newProcess = new Process(tempID, tempArrive, tempExecSize, tempTickets);
-                System.out.println("2");
                 processes.add(newProcess);
-                System.out.println("3");
             }
             else if (line.startsWith(("BEGINRANDOM")))
             {
