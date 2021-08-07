@@ -31,12 +31,18 @@ public class A1
             System.exit(-2);
         }
         // FCFS
-
+        FCFS processorFCFS = new FCFS();
+        processorFCFS.setDISP(DISP);
+        processorFCFS.loadProcesses(processes);
+        processorFCFS.run();
         // SRT
 
         // FBV
 
         // LTR
+
+        String report = getReport(processorFCFS);
+        System.out.println(report);
     }
 
 
@@ -116,5 +122,19 @@ public class A1
             }
         }
         return false;
+    }
+
+    public String getReport(Algorithm processorFCFS)
+    {
+        String report = "";
+        report += processorFCFS.reportFull();
+        // SRT report full
+        // FBV report full
+        // LTR report full
+        report += processorFCFS.reportAvg();
+        // SRT report avg
+        // FBV report avg
+        // LTR report avg
+        return report;
     }
 }
