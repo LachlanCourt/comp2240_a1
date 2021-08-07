@@ -7,6 +7,7 @@ public class Process
     private int execSize;
     private int tickets;
     private int remainingTime;
+    private int lowPriorityTime; // FBV
 
     private ArrayList<ProcessEvent> processHistory;
 
@@ -54,6 +55,16 @@ public class Process
     public void decRemainingTime()
     {
         remainingTime -= 1;
+    }
+
+    public void setLowPriorityTime(int time_)
+    {
+        lowPriorityTime = time_;
+    }
+
+    public int getLowPriorityTime()
+    {
+        return lowPriorityTime;
     }
 
     public int getTickets()
