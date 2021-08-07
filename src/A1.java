@@ -31,12 +31,28 @@ public class A1
             System.exit(-2);
         }
         // FCFS
+        FCFS processorFCFS = new FCFS();
+        processorFCFS.setDISP(DISP);
+        processorFCFS.loadProcesses(processes);
+        processorFCFS.run();
 
         // SRT
+        //        SRT processorSRT = new SRT();
+        //        processorSRT.loadProcesses(processes);
+        //        processorSRT.run();
 
         // FBV
+        //        FBV processorFBV = new FBV();
+        //        processorFBV.loadProcesses(processes);
+        //        processorFBV.run();
 
         // LTR
+        //        LTR processorLTR = new LTR();
+        //        processorLTR.loadProcesses(processes);
+        //        processorLTR.run();
+
+        String report = getReport(processorFCFS);
+        System.out.println(report);
     }
 
 
@@ -116,5 +132,20 @@ public class A1
             }
         }
         return false;
+    }
+
+    public String getReport(Algorithm processorFCFS)
+    {
+        String report = "";
+        report += processorFCFS.reportFull();
+        // SRT report full
+        // FBV report full
+        // LTR report full
+        report += "\nSummary\nAlgorithm  Average Turnaround Time  Waiting Time\n";
+        report += processorFCFS.reportAvg();
+        // SRT report avg
+        // FBV report avg
+        // LTR report avg
+        return report;
     }
 }
