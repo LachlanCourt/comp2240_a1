@@ -112,7 +112,6 @@ public class A1
             }
             else if (line.startsWith("EOF"))
             {
-                System.out.println("Dispatcher time is: " + DISP);
                 return true;
             }
         }
