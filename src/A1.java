@@ -76,7 +76,7 @@ public class A1
             }
             else if (line.startsWith(("ID:")))
             {
-                tempID = Integer.valueOf(line.substring(4));
+                tempID = line.substring(4);
             }
             else if (line.startsWith(("Arrive:")))
             {
