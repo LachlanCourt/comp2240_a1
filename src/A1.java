@@ -46,17 +46,21 @@ public class A1
         processorSRT.loadProcesses(processes);
         processorSRT.run();
 
+        randomValues = new ArrayList<>();
+        processes = new ArrayList<>();
+        readData(args[0]);
+
         // FBV
-        //        FBV processorFBV = new FBV();
-        //        processorFBV.loadProcesses(processes);
-        //        processorFBV.run();
+        FBV processorFBV = new FBV();
+        processorFBV.loadProcesses(processes);
+        processorFBV.run();
 
         // LTR
         //        LTR processorLTR = new LTR();
         //        processorLTR.loadProcesses(processes);
         //        processorLTR.run();
 
-        String report = getReport(processorFCFS, processorSRT);
+        String report = getReport(processorFCFS, processorSRT, processorFBV);
         System.out.println(report);
     }
 
@@ -139,17 +143,17 @@ public class A1
         return false;
     }
 
-    public String getReport(Algorithm processorFCFS, Algorithm processorSRT)
+    public String getReport(Algorithm processorFCFS, Algorithm processorSRT, Algorithm processorFBV)
     {
         String report = "";
         report += processorFCFS.reportFull();
         report += processorSRT.reportFull();
-        // FBV report full
+        report += processorFBV.reportFull();
         // LTR report full
         report += "\nSummary\nAlgorithm  Average Turnaround Time  Waiting Time\n";
         report += processorFCFS.reportAvg();
         report += processorSRT.reportAvg();
-        // FBV report avg
+        report += processorFBV.reportAvg();
         // LTR report avg
         return report;
     }
