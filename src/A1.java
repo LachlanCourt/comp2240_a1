@@ -6,9 +6,8 @@ import java.util.*;
 public class A1
 {
     private static int DISP;
-    private ArrayList<Integer> randomValues = new ArrayList<>();
-    private ArrayList<Process> processes = new ArrayList<>();
-
+    private ArrayList<Integer> randomValues;
+    private ArrayList<Process> processes;
 
     // Main function
     public static void main(String[] args)
@@ -25,6 +24,8 @@ public class A1
 
     public void run(String[] args)
     {
+        randomValues = new ArrayList<>();
+        processes = new ArrayList<>();
         if (!readData(args[0]))
         {
             System.out.println("Error loading text file! Terminating");
@@ -36,10 +37,14 @@ public class A1
         processorFCFS.loadProcesses(processes);
         processorFCFS.run();
 
+        randomValues = new ArrayList<>();
+        processes = new ArrayList<>();
+        readData(args[0]);
+
         // SRT
-        //        SRT processorSRT = new SRT();
-        //        processorSRT.loadProcesses(processes);
-        //        processorSRT.run();
+        SRT processorSRT = new SRT();
+        processorSRT.loadProcesses(processes);
+        processorSRT.run();
 
         // FBV
         //        FBV processorFBV = new FBV();
@@ -51,7 +56,7 @@ public class A1
         //        processorLTR.loadProcesses(processes);
         //        processorLTR.run();
 
-        String report = getReport(processorFCFS);
+        String report = getReport(processorFCFS, processorSRT);
         System.out.println(report);
     }
 
@@ -134,16 +139,16 @@ public class A1
         return false;
     }
 
-    public String getReport(Algorithm processorFCFS)
+    public String getReport(Algorithm processorFCFS, Algorithm processorSRT)
     {
         String report = "";
         report += processorFCFS.reportFull();
-        // SRT report full
+        report += processorSRT.reportFull();
         // FBV report full
         // LTR report full
         report += "\nSummary\nAlgorithm  Average Turnaround Time  Waiting Time\n";
         report += processorFCFS.reportAvg();
-        // SRT report avg
+        report += processorSRT.reportAvg();
         // FBV report avg
         // LTR report avg
         return report;

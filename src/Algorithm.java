@@ -3,42 +3,27 @@ import java.util.ArrayList;
 public abstract class Algorithm
 {
     protected static int DISP;
-    protected ArrayList<Process> processList;
+    protected ArrayList<Process> upcomingProcessList;
     protected ArrayList<Process> totalProcesses;
     protected ArrayList<Process> unfinishedProcesses = new ArrayList<>();
     protected ArrayList<Process> finishedProcesses = new ArrayList<>();
+    protected ArrayList<ProcessEvent> processEventRecord = new ArrayList<>();
     protected int currentTime;
     protected String name = "";
 
     protected abstract int getNextProcess();
-
-    public void run()
-    {
-        currentTime = 0;
-        Process currentProcess;
-        addNewProcesses();
-        while (unfinishedProcesses.size() > 0)
-        {
-            currentTime += DISP;
-            currentProcess = unfinishedProcesses.get(getNextProcess());
-            currentProcess.addEvent(new ProcessEvent(currentTime, currentTime + currentProcess.getExecSize()));
-            currentTime += currentProcess.getExecSize();
-            unfinishedProcesses.remove(0);
-            finishedProcesses.add(currentProcess);
-            addNewProcesses();
-        }
-    }
+    protected abstract void run();
 
     public String reportFull()
     {
-        String report = name + "\n";
-        for (Process p : finishedProcesses)
+        String report = "\n" + name + "\n";
+        for (ProcessEvent p : processEventRecord)
         {
-            int startTime = p.getEvents().get(0).getStartTime();
-            report += "T" + startTime + ": " + p.getId() + "\n";
+            int startTime = p.getStartTime();
+            report += "T" + startTime + ": " + p.getProcessID() + "\n";
         }
         report += "\nProcess  Turnaround Time  Waiting Time\n";
-        for (Process p : finishedProcesses)
+        for (Process p : totalProcesses)  // Print in read order, not in process finish order
         {
             report += p.reportFull();
         }
@@ -62,7 +47,7 @@ public abstract class Algorithm
         report += avgTurnaround + " ".repeat(25 - avgTurnaround.length());
 
         String avgWaiting = String.format("%2.2f", totalWaiting / finishedProcesses.size());
-        report += avgWaiting + " ".repeat(25 - avgWaiting.length());
+        report += avgWaiting + " ".repeat(25 - avgWaiting.length()) + "\n";
 
         return report;
     }
@@ -74,19 +59,18 @@ public abstract class Algorithm
 
     public void loadProcesses(ArrayList<Process> processes_)
     {
-        processList = new ArrayList<>(processes_);
+        upcomingProcessList = new ArrayList<>(processes_);
         totalProcesses = new ArrayList<>(processes_);
     }
 
     protected void addNewProcesses()
     {
         Process p;
-        while ((processList.size() > 0) && (processList.get(0).getArrive() <= currentTime))
+        while ((upcomingProcessList.size() > 0) && (upcomingProcessList.get(0).getArrive() <= currentTime))
         {
-            System.out.println("Adding Process. Current Time:" + currentTime);
-            p = processList.get(0);
+            p = upcomingProcessList.get(0);
             unfinishedProcesses.add(p);
-            processList.remove(p);
+            upcomingProcessList.remove(p);
         }
     }
 }

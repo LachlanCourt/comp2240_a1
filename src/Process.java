@@ -6,6 +6,7 @@ public class Process
     private int arrive;
     private int execSize;
     private int tickets;
+    private int remainingTime;
 
     private ArrayList<ProcessEvent> processHistory;
 
@@ -15,6 +16,7 @@ public class Process
         arrive = arrive_;
         execSize = execSize_;
         tickets = tickets_;
+        remainingTime = execSize_;
 
         processHistory = new ArrayList<>();
     }
@@ -42,6 +44,16 @@ public class Process
     public int getExecSize()
     {
         return execSize;
+    }
+
+    public int getRemainingTime()
+    {
+        return remainingTime;
+    }
+
+    public void decRemainingTime()
+    {
+        remainingTime -= 1;
     }
 
     public int getTickets()
