@@ -109,15 +109,14 @@ public class A1
             {
                 readingProcesses = false;
                 readingValues = true;
-                continue;
-            }
-            else if (readingValues)
-            {
-                randomValues.add(Integer.valueOf(line));
             }
             else if (line.startsWith(("ENDRANDOM")) && (readingValues))
             {
                 readingValues = false;
+            }
+            else if (readingValues)
+            {
+                randomValues.add(Integer.valueOf(line));
             }
             else if (line.startsWith("EOF"))
             {
