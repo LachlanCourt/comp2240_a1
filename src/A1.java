@@ -141,6 +141,7 @@ public class A1
         // SRT report full
         // FBV report full
         // LTR report full
+        report += "\nSummary\nAlgorithm  Average Turnaround Time  Waiting Time\n";
         report += processorFCFS.reportAvg();
         // SRT report avg
         // FBV report avg

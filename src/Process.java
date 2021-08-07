@@ -57,11 +57,24 @@ public class Process
         report += id + " ".repeat(9 - id.length());
 
         // Turnaround Time
-        int endTime = processHistory.get(processHistory.size() - 1).getEndTime();
-        String turnaroundTime = String.valueOf(endTime - arrive);
+        String turnaroundTime = String.valueOf(getTurnaround());
         report += turnaroundTime + " ".repeat(17 - turnaroundTime.length());
 
         // Waiting Time
+        String waitingStr = String.valueOf(getWaiting());
+        report += waitingStr + "\n";
+
+        return report;
+    }
+
+    private int getTurnaround()
+    {
+        int endTime = processHistory.get(processHistory.size() - 1).getEndTime();
+        return endTime - arrive;
+    }
+
+    private int getWaiting()
+    {
         int waitingTime = 0;
         int lastFinishTime = arrive;
         for (ProcessEvent p : processHistory)
@@ -69,9 +82,6 @@ public class Process
             waitingTime += p.getStartTime() - lastFinishTime;
             lastFinishTime = p.getEndTime();
         }
-        String waitingStr = String.valueOf(waitingTime);
-        report += waitingStr + "\n";
-
-        return report;
+        return waitingTime;
     }
 }
