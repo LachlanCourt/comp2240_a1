@@ -61,7 +61,7 @@ public class A1
         String line;
         boolean readingProcesses = false;
         boolean readingValues = false;
-        String tempID = 0;
+        String tempID = "";
         int tempArrive = 0;
         int tempExecSize = 0;
         int tempTickets = 0;
