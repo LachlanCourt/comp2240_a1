@@ -64,7 +64,6 @@ public class LTR extends Algorithm
                 unfinishedProcesses.remove(currentProcess);
                 unfinishedProcesses.add(currentProcess);
             }
-
         }
     }
 }
