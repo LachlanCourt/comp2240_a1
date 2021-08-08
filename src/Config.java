@@ -13,7 +13,7 @@ public class Config
     // Member variables, data read from file
     private ArrayList<Process> processes;
     private ArrayList<Integer> randomValues;
-    private static int DISP;
+    private int DISP;
 
     // Constructor
     public Config(ArrayList<Process> processes_, ArrayList<Integer> randomValues_, int DISP_)
@@ -24,7 +24,7 @@ public class Config
     }
 
     // Getters
-    public static int getDISP()
+    public int getDISP()
     {
         return DISP;
     }

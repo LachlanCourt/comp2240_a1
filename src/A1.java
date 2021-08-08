@@ -37,7 +37,7 @@ public class A1
      */
     public void run(String[] args)
     {
-        // Check that the file is valid, if not, no point continuing
+        // Check that the file is valid, if the read throws an exception, terminate the simulation
         Config data = null;
         try
         {
@@ -70,6 +70,7 @@ public class A1
         // Loop through the algorithms and load a new set of processes, then run each algorithm
         for (Algorithm a : algorithms)
         {
+            // Read data file again to get a new set of process objects
             try
             {
                 data = readData(args[0]);
@@ -96,7 +97,7 @@ public class A1
      */
     public Config readData(String filename) throws Exception
     {
-        // Declare member variables
+        // Declare member variables to be added to config file
         ArrayList<Integer> randomValues = new ArrayList<>();
         ArrayList<Process> processes = new ArrayList<>();
         int DISP = 0;
@@ -176,6 +177,7 @@ public class A1
             // We have only been completely successful if we reach this line
             else if (line.startsWith("EOF"))
             {
+                // Create a new config object with the data read from the file and return it
                 Config data = new Config(processes, randomValues, DISP);
                 return data;
             }
