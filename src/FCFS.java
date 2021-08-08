@@ -47,7 +47,29 @@ public class FCFS extends Algorithm
     // Overridden getNextProcess method
     @Override protected int getNextProcess()
     {
-        // First come first serve runs the processes as they arrive. Always take the first from the list
-        return 0;
+        // First come first serve runs the processes as they arrive. Assume the first in the list is the earliest
+        int earliestArrivalTime = 0;
+        int earliestArrivialIndex = 0;
+        // Loop through the processes to find the one that arrived earliest
+        for (int i = 0; i < unfinishedProcesses.size(); i++)
+        {
+            // If the arrival time is explicitly less, update the earliestArrivalTime and index
+            if (unfinishedProcesses.get(i).getArrive() < earliestArrivalTime)
+            {
+                earliestArrivalTime = unfinishedProcesses.get(i).getArrive();
+                earliestArrivialIndex = i;
+            }
+            // If they are the same, only update if the process ID is lower (A lower process ID gets higher priority
+            // as per spec)
+            if (unfinishedProcesses.get(i).getArrive() == earliestArrivalTime)
+            {
+                if (unfinishedProcesses.get(i).getIntID() < unfinishedProcesses.get(earliestArrivialIndex).getIntID())
+                {
+                    earliestArrivalTime = unfinishedProcesses.get(i).getArrive();
+                    earliestArrivialIndex = i;
+                }
+            }
+        }
+        return earliestArrivialIndex;
     }
 }

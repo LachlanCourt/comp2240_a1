@@ -71,6 +71,16 @@ public class SRT extends Algorithm
                 shortestTime = unfinishedProcesses.get(i).getRemainingTime();
                 shortestIndex = i;
             }
+            // If they are the same, only update if the process ID is lower (A lower process ID gets higher priority
+            // as per spec)
+            if (unfinishedProcesses.get(i).getRemainingTime() == shortestTime)
+            {
+                if (unfinishedProcesses.get(i).getIntID() < unfinishedProcesses.get(shortestIndex).getIntID())
+                {
+                    shortestTime = unfinishedProcesses.get(i).getRemainingTime();
+                    shortestIndex = i;
+                }
+            }
         }
         // The index of the process with the shortest remaining time
         return shortestIndex;
