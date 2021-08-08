@@ -180,9 +180,9 @@ public class A1
                 // First sort by arrival time, an earlier arrival time comes before, later arrival time comes after
                 // In the case of two processes with the same arrival time, use the process ID as a tiebreaker.
                 Collections.sort(processes, (a, b) -> {
-                    int i = a.getArrive() < b.getArrive()
-                                ? -1
-                                : a.getArrive() == b.getArrive() ? a.getIntID() < b.getIntID() ? -1 : 1 : 1;
+                    int i = a.getArrive() < b.getArrive()    ? -1
+                            : a.getArrive() == b.getArrive() ? a.getIntID() < b.getIntID() ? -1 : 1
+                                                             : 1;
                     return i;
                 });
                 // Create a new config object with the data read from the file and return it
