@@ -18,7 +18,7 @@ public class Process
     private int tickets;
     private int remainingTime;
     private int lowPriorityTime;  // FBV
-    private int intID; // FCFS and SRT
+    private int intID;            // FCFS and SRT
 
     private ArrayList<ProcessEvent> processHistory;
 
