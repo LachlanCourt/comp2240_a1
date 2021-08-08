@@ -1,5 +1,5 @@
 import java.util.ArrayList;
-import java.util.Random;
+
 public class LTR extends Algorithm
 {
     private ArrayList<Integer> randomValues;
@@ -16,19 +16,16 @@ public class LTR extends Algorithm
         int i = 0;
         int winner = randomValues.get(0);
         randomValues.remove(0);
-        while (true)
+        while (counter + unfinishedProcesses.get(i).getTickets() < winner)
         {
             counter += unfinishedProcesses.get(i).getTickets();
-            if (counter > winner)
-            {
-                return i;
-            }
             i++;
             if (i > unfinishedProcesses.size() - 1)
             {
                 i = 0;
             }
         }
+        return i;
     }
 
     @Override protected void run()

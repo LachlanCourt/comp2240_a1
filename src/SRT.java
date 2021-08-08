@@ -20,14 +20,13 @@ public class SRT extends Algorithm
             {
                 currentTime++;
                 currentProcess.decRemainingTime();
+                addNewProcesses();
                 if (currentProcess.getRemainingTime() == 0)
                 {
                     unfinishedProcesses.remove(currentProcess);
                     finishedProcesses.add(currentProcess);
-                    addNewProcesses();
                     break;
                 }
-                addNewProcesses();
             }
             ProcessEvent event = new ProcessEvent(startTime, currentTime, currentProcess.getId());
             currentProcess.addEvent(event);
@@ -41,8 +40,8 @@ public class SRT extends Algorithm
         int shortestIndex = 0;
         for (int i = 0; i < unfinishedProcesses.size(); i++)
         {
-            if (unfinishedProcesses.get(i).getRemainingTime()
-                <= shortestTime)  // Prioritise processes that have arrived latest in the case of a tie
+            // Prioritise processes that have arrived latest in the case of a tie
+            if (unfinishedProcesses.get(i).getRemainingTime() <= shortestTime)
             {
                 shortestTime = unfinishedProcesses.get(i).getRemainingTime();
                 shortestIndex = i;

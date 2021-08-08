@@ -4,7 +4,6 @@ public class Process
 {
     private String id;
     private int arrive;
-    private int execSize;
     private int tickets;
     private int remainingTime;
     private int lowPriorityTime;  // FBV
@@ -15,9 +14,8 @@ public class Process
     {
         id = id_;
         arrive = arrive_;
-        execSize = execSize_;
-        tickets = tickets_;
         remainingTime = execSize_;
+        tickets = tickets_;
 
         processHistory = new ArrayList<>();
     }
@@ -40,11 +38,6 @@ public class Process
     public int getArrive()
     {
         return arrive;
-    }
-
-    public int getExecSize()
-    {
-        return execSize;
     }
 
     public int getRemainingTime()
