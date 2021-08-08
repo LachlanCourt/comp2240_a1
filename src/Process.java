@@ -93,7 +93,8 @@ public class Process
      * Precondition: processHistory cannot be empty (addEvent must have been run at least once)
      * Postcondition: return value
      */
-    public String reportFull()
+    @Override
+    public String toString()
     {
         String report = "";
 

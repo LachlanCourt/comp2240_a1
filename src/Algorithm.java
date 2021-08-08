@@ -45,7 +45,8 @@ public abstract class Algorithm
      * Precondition: run method must have been called otherwise report will be empty
      * Postcondition: return value
      */
-    public String reportFull()
+    @Override
+    public String toString()
     {
         // Start report with the name
         String report = "\n" + name + ":\n";
@@ -60,7 +61,7 @@ public abstract class Algorithm
         // Print in read order, not in process finish order
         for (Process p : totalProcesses)
         {
-            report += p.reportFull();
+            report += p.toString();
         }
         return report;
     }

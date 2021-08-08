@@ -201,7 +201,7 @@ public class A1
         for (Algorithm a : algorithms)
         {
             // Add the full report and the summary line for each algorithm
-            fullReport += a.reportFull();
+            fullReport += a.toString();
             summaryReport += a.reportAvg();
         }
         return fullReport + summaryReport;
