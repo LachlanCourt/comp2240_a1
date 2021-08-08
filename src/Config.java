@@ -22,13 +22,6 @@ public class Config
         this.processes = processes_;
         this.randomValues = randomValues_;
         this.DISP = DISP_;
-
-        // Sort the process list. Ugly incoming :$
-        // First sort by arrival time, an earlier arrival time comes before, later arrival time comes after
-        // In the case of two processes with the same arrival time, use the process ID as a tiebreaker.
-        Collections.sort(this.processes, (a, b) -> {
-            int i = a.getArrive() < b.getArrive() ? -1 : a.getArrive() == b.getArrive() ? a.getIntID() < b.getIntID() ? -1 : 1 : 1; return i;
-        });
     }
 
     // Getters
