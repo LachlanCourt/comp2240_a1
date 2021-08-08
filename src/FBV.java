@@ -82,7 +82,6 @@ public class FBV extends Algorithm
                     processQueues.get(nextProcessQueueIndex + 1).add(currentProcess);
                     if (nextProcessQueueIndex + 1 == processQueues.size() - 1)
                     {
-                        System.out.println("Current Time:" + currentTime);
                         currentProcess.setLowPriorityTime(currentTime);
                     }
                 }
