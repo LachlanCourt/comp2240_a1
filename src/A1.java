@@ -14,11 +14,6 @@ import java.util.*;
 
 public class A1
 {
-    // Member variables, data read from file
-    private static int DISP;
-    private ArrayList<Integer> randomValues;
-    private ArrayList<Process> processes;
-
     // Main function
     public static void main(String[] args)
     {
@@ -26,7 +21,7 @@ public class A1
         if (args.length != 1)
         {
             System.err.println("Invalid input data. Terminating...");
-            System.exit(-1);
+            System.exit(1);
         }
 
         // If there is a suitable number of arguments, pass those arguments to the run() method
@@ -43,10 +38,14 @@ public class A1
     public void run(String[] args)
     {
         // Check that the file is valid, if not, no point continuing
-        if (!readData(args[0]))
+        Config data = null;
+        try
         {
-            System.out.println("Error loading text file! Terminating");
-            System.exit(-2);
+            data = readData(args[0]);
+        }
+        catch (Exception e)
+        {
+            System.err.println(e);
         }
 
         // Declare an ArrayList to hold the four scheduling algorithms being simulated
@@ -56,7 +55,7 @@ public class A1
 
         // FCFS
         FCFS processorFCFS = new FCFS();
-        processorFCFS.setDISP(DISP);
+        processorFCFS.setDISP(data.getDISP());
         algorithms.add(processorFCFS);
         // SRT
         SRT processorSRT = new SRT();
@@ -65,14 +64,21 @@ public class A1
         FBV processorFBV = new FBV();
         algorithms.add(processorFBV);
         // LTR
-        LTR processorLTR = new LTR(randomValues);
+        LTR processorLTR = new LTR(data.getRandomValues());
         algorithms.add(processorLTR);
 
         // Loop through the algorithms and load a new set of processes, then run each algorithm
         for (Algorithm a : algorithms)
         {
-            readData(args[0]);
-            a.loadProcesses(processes);
+            try
+            {
+                data = readData(args[0]);
+            }
+            catch (Exception e)
+            {
+                System.err.println(e);
+            }
+            a.loadProcesses(data.getProcesses());
             a.run();
         }
 
@@ -88,11 +94,12 @@ public class A1
      * Precondition: filename should be specified
      * Postcondition: DISP, randomValues, and processes member variables will be filled with values from file
      */
-    public boolean readData(String filename)
+    public Config readData(String filename) throws Exception
     {
         // Declare member variables
-        randomValues = new ArrayList<>();
-        processes = new ArrayList<>();
+        ArrayList<Integer> randomValues = new ArrayList<>();
+        ArrayList<Process> processes = new ArrayList<>();
+        int DISP = 0;
 
         // Declare Scanner to read from the file
         Scanner input;
@@ -102,12 +109,12 @@ public class A1
         }
         catch (FileNotFoundException e)
         {
-            return false;
+            throw new Exception("Invalid file");
         }
         catch (NullPointerException e)
         {
             // If no filename is specified as an argument in program execution, the filename argument will be null
-            return false;
+            throw new Exception("Invalid file");
         }
 
         // Line that has been read
@@ -122,6 +129,8 @@ public class A1
         int tempArrive = 0;
         int tempExecSize = 0;
         int tempTickets = 0;
+
+        // Loop while there are still lines in the file
         while (input.hasNext())
         {
             line = input.nextLine();
@@ -179,11 +188,12 @@ public class A1
             // We have only been completely successful if we reach this line
             else if (line.startsWith("EOF"))
             {
-                return true;
+                Config data = new Config(processes, randomValues, DISP);
+                return data;
             }
         }
         // A file without the EOF indicator is treated as invalid
-        return false;
+        throw new Exception("Invalid file");
     }
 
     /**

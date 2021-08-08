@@ -45,8 +45,7 @@ public abstract class Algorithm
      * Precondition: run method must have been called otherwise report will be empty
      * Postcondition: return value
      */
-    @Override
-    public String toString()
+    @Override public String toString()
     {
         // Start report with the name
         String report = "\n" + name + ":\n";
@@ -103,11 +102,13 @@ public abstract class Algorithm
     {
         if (DISP_ > 0)
         {
+            // Only positive dispatch times will be considered
             this.DISP = DISP_;
         }
         else
         {
-            this.DISP = 1;
+            // In the case of an invalid dispatch time, default to 0
+            this.DISP = 0;
         }
     }
 
