@@ -55,7 +55,7 @@ public class FBV extends Algorithm
         return 0;
     }
 
-    @Override protected void run()
+    @Override public void run()
     {
         currentTime = 0;
         Process currentProcess;

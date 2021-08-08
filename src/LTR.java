@@ -37,7 +37,7 @@ public class LTR extends Algorithm
         return i;
     }
 
-    @Override protected void run()
+    @Override public void run()
     {
         currentTime = 0;
         Process currentProcess;
