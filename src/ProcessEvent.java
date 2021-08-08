@@ -11,10 +11,12 @@
 
 public class ProcessEvent
 {
+    // Member variables
     private int startTime;
     private int endTime;
     private String processID;
 
+    // Constructor
     public ProcessEvent(int startTime_, int endTime_, String id_)
     {
         startTime = startTime_;
@@ -22,6 +24,7 @@ public class ProcessEvent
         processID = id_;
     }
 
+    // Getters
     public int getStartTime()
     {
         return startTime;
