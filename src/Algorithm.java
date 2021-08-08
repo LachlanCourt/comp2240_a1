@@ -48,7 +48,7 @@ public abstract class Algorithm
     public String reportFull()
     {
         // Start report with the name
-        String report = "\n" + name + "\n";
+        String report = "\n" + name + ":\n";
         // Output the order that the processes moved through the simulation using ProcessEvents
         for (ProcessEvent p : processEventRecord)
         {
