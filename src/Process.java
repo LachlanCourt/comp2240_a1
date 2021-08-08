@@ -18,6 +18,7 @@ public class Process
     private int tickets;
     private int remainingTime;
     private int lowPriorityTime;  // FBV
+    private int intID; // FCFS and SRT
 
     private ArrayList<ProcessEvent> processHistory;
 
@@ -30,6 +31,8 @@ public class Process
         tickets = tickets_;
 
         processHistory = new ArrayList<>();
+
+        intID = Integer.valueOf(id_.substring(1));
     }
 
     /**
@@ -77,6 +80,11 @@ public class Process
     public int getTickets()
     {
         return tickets;
+    }
+
+    public int getIntID()
+    {
+        return intID;
     }
 
     /**
