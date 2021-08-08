@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 public class Process
 {
+    // Member variables
     private String id;
     private int arrive;
     private int tickets;
@@ -20,6 +21,7 @@ public class Process
 
     private ArrayList<ProcessEvent> processHistory;
 
+    // Constructor
     public Process(String id_, int arrive_, int execSize_, int tickets_)
     {
         id = id_;
@@ -30,16 +32,18 @@ public class Process
         processHistory = new ArrayList<>();
     }
 
+    /**
+     * Adds a ProcessEvent into the local cache
+     * @param event An event indicating a process being loaded into and loaded out of the cache
+     * Precondition: None
+     * Postcondition: @param is added to processHistory ArrayList
+     */
     public void addEvent(ProcessEvent event)
     {
         processHistory.add(event);
     }
 
-    public ArrayList<ProcessEvent> getEvents()
-    {
-        return processHistory;
-    }
-
+    // Getters and Setters
     public String getId()
     {
         return id;
@@ -75,6 +79,12 @@ public class Process
         return tickets;
     }
 
+    /**
+     * Produces a full output of how this moved through the algorithm
+     * @return full report
+     * Precondition: processHistory cannot be empty (addEvent must have been run at least once)
+     * Postcondition: return value
+     */
     public String reportFull()
     {
         String report = "";
@@ -93,16 +103,31 @@ public class Process
         return report;
     }
 
+    /**
+     * Get the turnaround time of the process
+     * @return the time passed between the process arriving and the process finishing processing
+     * Precondition: processHistory cannot be empty (addEvent must be called at least once)
+     * Postcondition: return value
+     */
     public int getTurnaround()
     {
         int endTime = processHistory.get(processHistory.size() - 1).getEndTime();
         return endTime - arrive;
     }
 
+    /**
+     * Get the waiting time of the process
+     * @return the time passed when the process is in a queue and not being actively processed
+     * Precondition: None
+     * Postcondition: return value
+     */
     public int getWaiting()
     {
         int waitingTime = 0;
         int lastFinishTime = arrive;
+        // Loop through the processHistory ArrayList at calculate the difference between the start time of a process
+        // and the end time of the process before it (assuming the end time of the process behind the first one is the
+        // time it arrives
         for (ProcessEvent p : processHistory)
         {
             waitingTime += p.getStartTime() - lastFinishTime;
