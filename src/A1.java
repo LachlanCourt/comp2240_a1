@@ -103,19 +103,7 @@ public class A1
 
         // Declare Scanner to read from the file
         Scanner input;
-        try
-        {
-            input = new Scanner(new File(filename));
-        }
-        catch (FileNotFoundException e)
-        {
-            throw new Exception("Invalid file");
-        }
-        catch (NullPointerException e)
-        {
-            // If no filename is specified as an argument in program execution, the filename argument will be null
-            throw new Exception("Invalid file");
-        }
+        input = new Scanner(new File(filename));
 
         // Line that has been read
         String line;
