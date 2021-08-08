@@ -66,7 +66,7 @@ public class SRT extends Algorithm
         for (int i = 0; i < unfinishedProcesses.size(); i++)
         {
             // Prioritise processes that have arrived latest in the case of a tie hence <= rather than <
-            if (unfinishedProcesses.get(i).getRemainingTime() <= shortestTime)
+            if (unfinishedProcesses.get(i).getRemainingTime() < shortestTime)
             {
                 shortestTime = unfinishedProcesses.get(i).getRemainingTime();
                 shortestIndex = i;
