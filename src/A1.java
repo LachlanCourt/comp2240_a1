@@ -55,11 +55,9 @@ public class A1
             a.run();
         }
 
-
         String report = getReport(algorithms);
         System.out.println(report);
     }
-
 
     public boolean readData(String filename)
     {

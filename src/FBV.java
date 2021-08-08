@@ -61,15 +61,14 @@ public class FBV extends Algorithm
             {
                 currentTime++;
                 currentProcess.decRemainingTime();
+                addNewProcesses();
                 if (currentProcess.getRemainingTime() == 0)
                 {
                     unfinishedProcesses.remove(currentProcess);
                     processQueues.get(nextProcessQueueIndex).remove(currentProcess);
                     finishedProcesses.add(currentProcess);
-                    addNewProcesses();
                     break;
                 }
-                addNewProcesses();
             }
             ProcessEvent event = new ProcessEvent(startTime, currentTime, currentProcess.getId());
             currentProcess.addEvent(event);
