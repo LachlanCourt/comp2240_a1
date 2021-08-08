@@ -44,7 +44,7 @@ public class A1
         FBV processorFBV = new FBV();
         algorithms.add(processorFBV);
         // LTR
-        LTR processorLTR = new LTR();
+        LTR processorLTR = new LTR(randomValues);
         algorithms.add(processorLTR);
 
 

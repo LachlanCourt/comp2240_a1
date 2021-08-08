@@ -1,18 +1,34 @@
+import java.util.ArrayList;
 import java.util.Random;
 public class LTR extends Algorithm
 {
+    private ArrayList<Integer> randomValues;
 
-    public LTR()
+    public LTR(ArrayList<Integer> values_)
     {
         name = "LTR";
+        randomValues = values_;
     }
 
     @Override protected int getNextProcess()
     {
-        Random rand = new Random(844422);
-        System.out.println(rand.nextInt(550));
-
-        return 0;
+        int counter = 0;
+        int i = 0;
+        int winner = randomValues.get(0);
+        randomValues.remove(0);
+        while (true)
+        {
+            counter += unfinishedProcesses.get(i).getTickets();
+            if (counter > winner)
+            {
+                return i;
+            }
+            i++;
+            if (i > unfinishedProcesses.size() - 1)
+            {
+                i = 0;
+            }
+        }
     }
 
     @Override protected void run()
@@ -41,6 +57,14 @@ public class LTR extends Algorithm
             ProcessEvent event = new ProcessEvent(startTime, currentTime, currentProcess.getId());
             currentProcess.addEvent(event);
             processEventRecord.add(event);
+
+            // Move process to back of the list
+            if (currentProcess.getRemainingTime() != 0)
+            {
+                unfinishedProcesses.remove(currentProcess);
+                unfinishedProcesses.add(currentProcess);
+            }
+
         }
     }
 }
