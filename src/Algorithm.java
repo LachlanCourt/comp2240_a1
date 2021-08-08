@@ -100,7 +100,14 @@ public abstract class Algorithm
     // Setter
     public void setDISP(int DISP_)
     {
-        DISP = DISP_;
+        if (DISP_ > 0)
+        {
+            this.DISP = DISP_;
+        }
+        else
+        {
+            this.DISP = 1;
+        }
     }
 
     /**
