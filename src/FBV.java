@@ -145,7 +145,7 @@ public class FBV extends Algorithm
         {
             p = upcomingProcessList.get(0);
             unfinishedProcesses.add(p);
-            processQueues.get(0).add(p); // Add to the first, highest priority, queue
+            processQueues.get(0).add(p);  // Add to the first, highest priority, queue
             upcomingProcessList.remove(p);
         }
     }
