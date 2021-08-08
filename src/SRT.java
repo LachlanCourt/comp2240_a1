@@ -12,7 +12,7 @@ public class SRT extends Algorithm
     // Default Constructor, set name of Algorithm
     public SRT()
     {
-        name = "SRT";
+        this.name = "SRT";
     }
 
     // Overridden run method

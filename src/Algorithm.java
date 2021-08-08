@@ -45,7 +45,7 @@ public abstract class Algorithm
      * Precondition: run method must have been called otherwise report will be empty
      * Postcondition: return value
      */
-    public String reportFull()
+    @Override public String toString()
     {
         // Start report with the name
         String report = "\n" + name + ":\n";
@@ -60,7 +60,7 @@ public abstract class Algorithm
         // Print in read order, not in process finish order
         for (Process p : totalProcesses)
         {
-            report += p.reportFull();
+            report += p.toString();
         }
         return report;
     }
@@ -100,7 +100,16 @@ public abstract class Algorithm
     // Setter
     public void setDISP(int DISP_)
     {
-        DISP = DISP_;
+        if (DISP_ > 0)
+        {
+            // Only positive dispatch times will be considered
+            this.DISP = DISP_;
+        }
+        else
+        {
+            // In the case of an invalid dispatch time, default to 0
+            this.DISP = 0;
+        }
     }
 
     /**

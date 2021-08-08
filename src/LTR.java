@@ -17,8 +17,8 @@ public class LTR extends Algorithm
     // Constructor, set name of Algorithm and take in the random values read from text file
     public LTR(ArrayList<Integer> values_)
     {
-        name = "LTR";
-        randomValues = values_;
+        this.name = "LTR";
+        this.randomValues = values_;
     }
 
     // Overridden run method
