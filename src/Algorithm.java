@@ -1,3 +1,13 @@
+/*******************************************************************************
+ ****    COMP2240 Assignment 1
+ ****    c3308061
+ ****    Lachlan Court
+ ****    08/08/2021
+ ****    This class is a parent class of a scheduling algorithm. It has some
+ ****    abstract methods to ensure that all algorithms operate similarly, and it
+ ****    has functionality to produce the report at the end of program execution
+ *******************************************************************************/
+
 import java.util.ArrayList;
 
 public abstract class Algorithm

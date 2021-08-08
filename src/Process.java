@@ -1,3 +1,13 @@
+/*******************************************************************************
+ ****    COMP2240 Assignment 1
+ ****    c3308061
+ ****    Lachlan Court
+ ****    08/08/2021
+ ****    This class represents a process that is running through the CPU. It is
+ ****    initially read from a text file and has member variables to record data
+ ****    during the simulation to report at the end
+ *******************************************************************************/
+
 import java.util.ArrayList;
 
 public class Process

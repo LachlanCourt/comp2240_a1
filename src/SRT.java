@@ -1,3 +1,12 @@
+/*******************************************************************************
+ ****    COMP2240 Assignment 1
+ ****    c3308061
+ ****    Lachlan Court
+ ****    08/08/2021
+ ****    This class is a child class of Algorithm.java. It represents a Shortest
+ ****    Remaining Time algorithm.
+ *******************************************************************************/
+
 public class SRT extends Algorithm
 {
     public SRT()

@@ -1,6 +1,15 @@
+/*******************************************************************************
+ ****    COMP2240 Assignment 1
+ ****    c3308061
+ ****    Lachlan Court
+ ****    08/08/2021
+ ****    This class houses the main run of the program. It creates an instance
+ ****    of each scheduling algorithm, runs them one by one, and then outputs
+ ****    the result
+ *******************************************************************************/
+
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.PrintWriter;
 import java.util.*;
 
 public class A1

@@ -1,3 +1,12 @@
+/*******************************************************************************
+ ****    COMP2240 Assignment 1
+ ****    c3308061
+ ****    Lachlan Court
+ ****    08/08/2021
+ ****    This class is a child class of Algorithm.java. It represents a Lottery
+ ****    algorithm.
+ *******************************************************************************/
+
 import java.util.ArrayList;
 
 public class LTR extends Algorithm
