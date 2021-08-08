@@ -9,27 +9,37 @@
 
 public class SRT extends Algorithm
 {
+    // Default Constructor, set name of Algorithm
     public SRT()
     {
         name = "SRT";
     }
 
+    // Overridden run method
     @Override public void run()
     {
+        // Initialise the algorithm and add any processes that arrive at T=0
         currentTime = 0;
         Process currentProcess;
         addNewProcesses();
+        // Loop while there are unfinished processes
         while (unfinishedProcesses.size() > 0)
         {
+            // Add the dispatch time and get a process from the list
             currentTime += DISP;
             int nextProcessIndex = getNextProcess();
             currentProcess = unfinishedProcesses.get(nextProcessIndex);
+            // Record the time the algorithm started working on this process
             int startTime = currentTime;
+            // Loop while there isn't a new process that would finish earlier
             while (getNextProcess() == nextProcessIndex)
             {
+                // Increment the global time and decrement the time left on the current process
                 currentTime++;
                 currentProcess.decRemainingTime();
+                // Check for any processes that have arrived in the meantime
                 addNewProcesses();
+                // If a process has finished, move it to the finished list and break to pick a new process
                 if (currentProcess.getRemainingTime() == 0)
                 {
                     unfinishedProcesses.remove(currentProcess);
@@ -37,25 +47,32 @@ public class SRT extends Algorithm
                     break;
                 }
             }
+            // Whether the event finished or was interrupted, generate a new ProcessEvent and add the time it spent
+            // processing
             ProcessEvent event = new ProcessEvent(startTime, currentTime, currentProcess.getId());
+            // Add the event to the process's processHistory list and the algorithm's processEventRecord list
             currentProcess.addEvent(event);
             processEventRecord.add(event);
         }
     }
 
+    // Overridden getNextProcess method
     @Override protected int getNextProcess()
     {
+        // Assume the process with the shortest time remaining is the first one in the list
         int shortestTime = unfinishedProcesses.get(0).getRemainingTime();
         int shortestIndex = 0;
+        // Loop through unfinished processes
         for (int i = 0; i < unfinishedProcesses.size(); i++)
         {
-            // Prioritise processes that have arrived latest in the case of a tie
+            // Prioritise processes that have arrived latest in the case of a tie hence <= rather than <
             if (unfinishedProcesses.get(i).getRemainingTime() <= shortestTime)
             {
                 shortestTime = unfinishedProcesses.get(i).getRemainingTime();
                 shortestIndex = i;
             }
         }
+        // The index of the process with the shortest remaining time
         return shortestIndex;
     }
 }
