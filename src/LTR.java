@@ -16,7 +16,7 @@ public class LTR extends Algorithm
         int i = 0;
         int winner = randomValues.get(0);
         randomValues.remove(0);
-        while (counter + unfinishedProcesses.get(i).getTickets() < winner)
+        while (counter + unfinishedProcesses.get(i).getTickets() <= winner)
         {
             counter += unfinishedProcesses.get(i).getTickets();
             i++;
