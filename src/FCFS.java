@@ -12,7 +12,7 @@ public class FCFS extends Algorithm
     // Default Constructor, set name of Algorithm
     public FCFS()
     {
-        name = "FCFS";
+        this.name = "FCFS";
     }
 
     // Overridden run method

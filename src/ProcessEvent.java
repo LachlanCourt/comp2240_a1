@@ -19,9 +19,9 @@ public class ProcessEvent
     // Constructor
     public ProcessEvent(int startTime_, int endTime_, String id_)
     {
-        startTime = startTime_;
-        endTime = endTime_;
-        processID = id_;
+        this.startTime = startTime_;
+        this.endTime = endTime_;
+        this.processID = id_;
     }
 
     // Getters

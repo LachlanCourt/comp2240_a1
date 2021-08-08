@@ -25,14 +25,14 @@ public class Process
     // Constructor
     public Process(String id_, int arrive_, int execSize_, int tickets_)
     {
-        id = id_;
-        arrive = arrive_;
-        remainingTime = execSize_;
-        tickets = tickets_;
+        this.id = id_;
+        this.arrive = arrive_;
+        this.remainingTime = execSize_;
+        this.tickets = tickets_;
 
-        processHistory = new ArrayList<>();
+        this.processHistory = new ArrayList<>();
 
-        intID = Integer.valueOf(id_.substring(1));
+        this.intID = Integer.valueOf(id_.substring(1));
     }
 
     /**
@@ -43,7 +43,7 @@ public class Process
      */
     public void addEvent(ProcessEvent event)
     {
-        processHistory.add(event);
+        this.processHistory.add(event);
     }
 
     // Getters and Setters
@@ -69,7 +69,7 @@ public class Process
 
     public void setLowPriorityTime(int time_)
     {
-        lowPriorityTime = time_;
+        this.lowPriorityTime = time_;
     }
 
     public int getLowPriorityTime()

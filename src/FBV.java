@@ -21,15 +21,15 @@ public class FBV extends Algorithm
     // Default Constructor, set name of Algorithm
     public FBV()
     {
-        name = "FBV";
+        this.name = "FBV";
         // Initialise processQueues with four standard queues, and timeQuanta with the time quanta as per spec
-        processQueues = new ArrayList<>();
+        this.processQueues = new ArrayList<>();
         for (int i = 0; i < 4; i++)
         {
             Queue<Process> newQueue = new LinkedList<>();
-            processQueues.add(newQueue);
+            this.processQueues.add(newQueue);
         }
-        timeQuanta = new ArrayList<>(Arrays.asList(new Integer[] {1, 2, 4, 4}));
+        this.timeQuanta = new ArrayList<>(Arrays.asList(new Integer[] {1, 2, 4, 4}));
     }
 
     // Overridden run method
