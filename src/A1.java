@@ -90,9 +90,9 @@ public class A1
     /**
      * Read simulation data from a file
      * @param filename name of the file to read from
-     * @return flag indicating successful or unsuccessful read
+     * @return object containing data read from file
      * Precondition: filename should be specified
-     * Postcondition: DISP, randomValues, and processes member variables will be filled with values from file
+     * Postcondition: Return value
      */
     public Config readData(String filename) throws Exception
     {
