@@ -23,24 +23,28 @@ public class FCFS extends Algorithm
         Process currentProcess;
         addNewProcesses();
         // Loop while there are unfinished processes
-        while (unfinishedProcesses.size() > 0)
+        while (finishedProcesses.size() < totalProcesses.size())
         {
-            // Add the dispatch time and get a process from the list
-            currentTime += DISP;
-            currentProcess = unfinishedProcesses.get(getNextProcess());
-            // Generate a new ProcessEvent and add the entire remaining time. FCFS algorithm does not timeout processes
-            // So we can assume that it will continue processing until it is complete
-            ProcessEvent event =
-                new ProcessEvent(currentTime, currentTime + currentProcess.getRemainingTime(), currentProcess.getId());
-            // Add the event to the process's processHistory list and the algorithm's processEventRecord list
-            currentProcess.addEvent(event);
-            processEventRecord.add(event);
-            // Update the current time and then move the process from unfinished to finished
-            currentTime += currentProcess.getRemainingTime();
-            unfinishedProcesses.remove(currentProcess);
-            finishedProcesses.add(currentProcess);
-            // Check for any processes that have arrived in the meantime
-            addNewProcesses();
+            if (unfinishedProcesses.size() > 0)
+            {
+                // Add the dispatch time and get a process from the list
+                currentTime += DISP;
+                currentProcess = unfinishedProcesses.get(getNextProcess());
+                // Generate a new ProcessEvent and add the entire remaining time. FCFS algorithm does not timeout
+                // processes So we can assume that it will continue processing until it is complete
+                ProcessEvent event = new ProcessEvent(currentTime,
+                                                      currentTime + currentProcess.getRemainingTime(),
+                                                      currentProcess.getId());
+                // Add the event to the process's processHistory list and the algorithm's processEventRecord list
+                currentProcess.addEvent(event);
+                processEventRecord.add(event);
+                // Update the current time and then move the process from unfinished to finished
+                currentTime += currentProcess.getRemainingTime();
+                unfinishedProcesses.remove(currentProcess);
+                finishedProcesses.add(currentProcess);
+                // Check for any processes that have arrived in the meantime
+                addNewProcesses();
+            }
         }
     }
 

@@ -40,58 +40,62 @@ public class FBV extends Algorithm
         Process currentProcess;
         addNewProcesses();
         // Loop while there are unfinished processes
-        while (unfinishedProcesses.size() > 0)
+        while (finishedProcesses.size() < totalProcesses.size())
         {
-            // Add the dispatch time and get a process from the list
-            currentTime += DISP;
-            int nextProcessQueueIndex = getNextProcess();
-            currentProcess = processQueues.get(nextProcessQueueIndex).poll();
-            // Record the time the algorithm started working on this process
-            int startTime = currentTime;
-            // Loop while the current process has not reached its allocated time quanta
-            while (currentTime - startTime < timeQuanta.get(nextProcessQueueIndex))
+            if (unfinishedProcesses.size() > 0)
             {
-                // Increment the global time and decrement the time left on the current process
-                currentTime++;
-                currentProcess.decRemainingTime();
-                // Check for any processes that have arrived in the meantime
-                addNewProcesses();
-                // If a process has finished, move it to the finished list and break to pick a new process
-                if (currentProcess.getRemainingTime() == 0)
+                // Add the dispatch time and get a process from the list
+                currentTime += DISP;
+                int nextProcessQueueIndex = getNextProcess();
+                currentProcess = processQueues.get(nextProcessQueueIndex).poll();
+                // Record the time the algorithm started working on this process
+                int startTime = currentTime;
+                // Loop while the current process has not reached its allocated time quanta
+                while (currentTime - startTime < timeQuanta.get(nextProcessQueueIndex))
                 {
-                    unfinishedProcesses.remove(currentProcess);
-                    processQueues.get(nextProcessQueueIndex).remove(currentProcess);
-                    finishedProcesses.add(currentProcess);
-                    break;
-                }
-            }
-            // Whether the event finished or was interrupted, generate a new ProcessEvent and add the time it spent
-            // processing
-            ProcessEvent event = new ProcessEvent(startTime, currentTime, currentProcess.getId());
-            // Add the event to the process's processHistory list and the algorithm's processEventRecord list
-            currentProcess.addEvent(event);
-            processEventRecord.add(event);
-            // If a process did not finish, move it into the lower priority queue below
-            if (currentProcess.getRemainingTime() != 0)
-            {
-                // Remove the process from its current queue
-                processQueues.get(nextProcessQueueIndex).remove(currentProcess);
-                // If the process isn't already in the lowest priority queue
-                if (nextProcessQueueIndex != processQueues.size() - 1)
-                {
-                    processQueues.get(nextProcessQueueIndex + 1).add(currentProcess);
-                    // If a process has been in the lowest priority queue for more than 32 timesteps, it should be
-                    // moved back to the high priority queue. In this case, if the process has just been moved into the
-                    // lowest priority queue, record the time it was moved there.
-                    if (nextProcessQueueIndex + 1 == processQueues.size() - 1)
+                    // Increment the global time and decrement the time left on the current process
+                    currentTime++;
+                    currentProcess.decRemainingTime();
+                    // Check for any processes that have arrived in the meantime
+                    addNewProcesses();
+                    // If a process has finished, move it to the finished list and break to pick a new process
+                    if (currentProcess.getRemainingTime() == 0)
                     {
-                        currentProcess.setLowPriorityTime(currentTime);
+                        unfinishedProcesses.remove(currentProcess);
+                        processQueues.get(nextProcessQueueIndex).remove(currentProcess);
+                        finishedProcesses.add(currentProcess);
+                        break;
                     }
                 }
-                // If the process is already in the lowest priority queue, add it into the same queue, but on the back
-                else
+                // Whether the event finished or was interrupted, generate a new ProcessEvent and add the time it spent
+                // processing
+                ProcessEvent event = new ProcessEvent(startTime, currentTime, currentProcess.getId());
+                // Add the event to the process's processHistory list and the algorithm's processEventRecord list
+                currentProcess.addEvent(event);
+                processEventRecord.add(event);
+                // If a process did not finish, move it into the lower priority queue below
+                if (currentProcess.getRemainingTime() != 0)
                 {
-                    processQueues.get(processQueues.size() - 1).add(currentProcess);  // Round robin
+                    // Remove the process from its current queue
+                    processQueues.get(nextProcessQueueIndex).remove(currentProcess);
+                    // If the process isn't already in the lowest priority queue
+                    if (nextProcessQueueIndex != processQueues.size() - 1)
+                    {
+                        processQueues.get(nextProcessQueueIndex + 1).add(currentProcess);
+                        // If a process has been in the lowest priority queue for more than 32 timesteps, it should be
+                        // moved back to the high priority queue. In this case, if the process has just been moved into
+                        // the lowest priority queue, record the time it was moved there.
+                        if (nextProcessQueueIndex + 1 == processQueues.size() - 1)
+                        {
+                            currentProcess.setLowPriorityTime(currentTime);
+                        }
+                    }
+                    // If the process is already in the lowest priority queue, add it into the same queue, but on the
+                    // back
+                    else
+                    {
+                        processQueues.get(processQueues.size() - 1).add(currentProcess);  // Round robin
+                    }
                 }
             }
         }
