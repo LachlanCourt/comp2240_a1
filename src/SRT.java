@@ -56,6 +56,11 @@ public class SRT extends Algorithm
                 currentProcess.addEvent(event);
                 processEventRecord.add(event);
             }
+            else
+            {
+                currentTime++;
+                addNewProcesses();
+            }
         }
     }
 

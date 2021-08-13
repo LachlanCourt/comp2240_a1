@@ -98,6 +98,11 @@ public class FBV extends Algorithm
                     }
                 }
             }
+            else
+            {
+                currentTime++;
+                addNewProcesses();
+            }
         }
     }
 

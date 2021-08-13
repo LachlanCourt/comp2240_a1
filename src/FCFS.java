@@ -45,6 +45,11 @@ public class FCFS extends Algorithm
                 // Check for any processes that have arrived in the meantime
                 addNewProcesses();
             }
+            else
+            {
+                currentTime++;
+                addNewProcesses();
+            }
         }
     }
 

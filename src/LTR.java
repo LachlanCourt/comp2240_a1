@@ -69,6 +69,11 @@ public class LTR extends Algorithm
                     unfinishedProcesses.add(currentProcess);
                 }
             }
+            else
+            {
+                currentTime++;
+                addNewProcesses();
+            }
         }
     }
 
