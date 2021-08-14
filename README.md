@@ -18,4 +18,4 @@ There are two sample files in this project that can be used to sample the simula
 
 Run with the following command
 
-`java A1 <filename>`
+`java A1 data/<filename>`
