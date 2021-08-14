@@ -18,7 +18,7 @@ public abstract class Algorithm
     // Member variables by all algorithms
     protected ArrayList<Process> upcomingProcessList;
     protected ArrayList<Process> totalProcesses;
-    protected ArrayList<Process> unfinishedProcesses = new ArrayList<>();
+    protected ArrayList<Process> ready = new ArrayList<>();
     protected ArrayList<Process> finishedProcesses = new ArrayList<>();
     protected ArrayList<ProcessEvent> processEventRecord = new ArrayList<>();
     protected int currentTime;
@@ -125,7 +125,7 @@ public abstract class Algorithm
     }
 
     /**
-     * Moves processes from upcomingProcessList into unfinishedProcesses if the process is due to arrive according to
+     * Moves processes from upcomingProcessList into ready if the process is due to arrive according to
      * the currentTime
      * Precondition: None
      * Postcondition: Algorithm has processes loaded and is ready to have run method called
@@ -136,9 +136,9 @@ public abstract class Algorithm
         // according to the currentTime
         while ((upcomingProcessList.size() > 0) && (upcomingProcessList.get(0).getArrive() <= currentTime))
         {
-            // Grab the process out and move it from upcomingProcessList to unfinishedProcesses
+            // Grab the process out and move it from upcomingProcessList to ready
             Process p = upcomingProcessList.get(0);
-            unfinishedProcesses.add(p);
+            ready.add(p);
             upcomingProcessList.remove(p);
         }
     }

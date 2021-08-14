@@ -19,7 +19,7 @@ public class A1
         // If a filename is not specified, the program cannot run
         if (args.length != 1)
         {
-            System.err.println("Invalid input data. Terminating...");
+            System.err.println("Filename missing");
             System.exit(1);
         }
 
@@ -44,7 +44,8 @@ public class A1
         }
         catch (Exception e)
         {
-            System.err.println(e);
+            System.err.println("Error reading file");
+            System.exit(1);
         }
 
         // Declare an ArrayList to hold the four scheduling algorithms being simulated
@@ -76,7 +77,8 @@ public class A1
             }
             catch (Exception e)
             {
-                System.err.println(e);
+                System.err.println("Error reading file");
+                System.exit(1);
             }
             a.loadProcesses(data.getProcesses());
             a.run();

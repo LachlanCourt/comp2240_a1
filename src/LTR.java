@@ -31,12 +31,12 @@ public class LTR extends Algorithm
         // Loop while there are unfinished processes
         while (finishedProcesses.size() < totalProcesses.size())
         {
-            if (unfinishedProcesses.size() > 0)
+            if (ready.size() > 0)
             {
                 // Add the dispatch time and get a process from the list
                 currentTime += DISP;
                 int nextProcessIndex = getNextProcess();
-                currentProcess = unfinishedProcesses.get(nextProcessIndex);
+                currentProcess = ready.get(nextProcessIndex);
                 // Record the time the algorithm started working on this process
                 int startTime = currentTime;
                 // Loop while the current process has not reached its allocated time quanta (hard coded 4 timesteps)
@@ -50,7 +50,7 @@ public class LTR extends Algorithm
                     // If a process has finished, move it to the finished list and break to pick a new process
                     if (currentProcess.getRemainingTime() == 0)
                     {
-                        unfinishedProcesses.remove(currentProcess);
+                        ready.remove(currentProcess);
                         finishedProcesses.add(currentProcess);
                         break;
                     }
@@ -65,8 +65,8 @@ public class LTR extends Algorithm
                 // If the process has not finished processing, move process to back of the list
                 if (currentProcess.getRemainingTime() != 0)
                 {
-                    unfinishedProcesses.remove(currentProcess);
-                    unfinishedProcesses.add(currentProcess);
+                    ready.remove(currentProcess);
+                    ready.add(currentProcess);
                 }
             }
             else
@@ -87,14 +87,14 @@ public class LTR extends Algorithm
         int winner = randomValues.get(0);
         randomValues.remove(0);
         // Loop while we have not found a winner
-        while (counter + unfinishedProcesses.get(i).getTickets() <= winner)
+        while (counter + ready.get(i).getTickets() <= winner)
         {
             // Add the tickets of the current process to the counter and increment the iterator
-            counter += unfinishedProcesses.get(i).getTickets();
+            counter += ready.get(i).getTickets();
             i++;
-            // If we have reached the end of the list of unfinished processes, reset the iterator to 0. Keep looping
+            // If we have reached the end of the list of processes in ready, reset the iterator to 0. Keep looping
             // until we find a winner
-            if (i > unfinishedProcesses.size() - 1)
+            if (i > ready.size() - 1)
             {
                 i = 0;
             }

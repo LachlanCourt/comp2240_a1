@@ -25,12 +25,12 @@ public class SRT extends Algorithm
         // Loop while there are unfinished processes
         while (finishedProcesses.size() < totalProcesses.size())
         {
-            if (unfinishedProcesses.size() > 0)
+            if (ready.size() > 0)
             {
                 // Add the dispatch time and get a process from the list
                 currentTime += DISP;
                 int nextProcessIndex = getNextProcess();
-                currentProcess = unfinishedProcesses.get(nextProcessIndex);
+                currentProcess = ready.get(nextProcessIndex);
                 // Record the time the algorithm started working on this process
                 int startTime = currentTime;
                 // Loop while there isn't a new process that would finish earlier
@@ -44,7 +44,7 @@ public class SRT extends Algorithm
                     // If a process has finished, move it to the finished list and break to pick a new process
                     if (currentProcess.getRemainingTime() == 0)
                     {
-                        unfinishedProcesses.remove(currentProcess);
+                        ready.remove(currentProcess);
                         finishedProcesses.add(currentProcess);
                         break;
                     }
@@ -68,24 +68,24 @@ public class SRT extends Algorithm
     @Override protected int getNextProcess()
     {
         // Assume the process with the shortest time remaining is the first one in the list
-        int shortestTime = unfinishedProcesses.get(0).getRemainingTime();
+        int shortestTime = ready.get(0).getRemainingTime();
         int shortestIndex = 0;
-        // Loop through unfinished processes
-        for (int i = 0; i < unfinishedProcesses.size(); i++)
+        // Loop through ready processes
+        for (int i = 0; i < ready.size(); i++)
         {
             // Adjust the shortestIndex if the current process is due to finish before the current shortestTime
-            if (unfinishedProcesses.get(i).getRemainingTime() < shortestTime)
+            if (ready.get(i).getRemainingTime() < shortestTime)
             {
-                shortestTime = unfinishedProcesses.get(i).getRemainingTime();
+                shortestTime = ready.get(i).getRemainingTime();
                 shortestIndex = i;
             }
             // If they are the same, only update if the process ID is lower (A lower process ID gets higher priority
             // as per spec)
-            if (unfinishedProcesses.get(i).getRemainingTime() == shortestTime)
+            if (ready.get(i).getRemainingTime() == shortestTime)
             {
-                if (unfinishedProcesses.get(i).getIntID() < unfinishedProcesses.get(shortestIndex).getIntID())
+                if (ready.get(i).getIntID() < ready.get(shortestIndex).getIntID())
                 {
-                    shortestTime = unfinishedProcesses.get(i).getRemainingTime();
+                    shortestTime = ready.get(i).getRemainingTime();
                     shortestIndex = i;
                 }
             }
