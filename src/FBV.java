@@ -42,7 +42,7 @@ public class FBV extends Algorithm
         // Loop while there are unfinished processes
         while (finishedProcesses.size() < totalProcesses.size())
         {
-            if (unfinishedProcesses.size() > 0)
+            if (ready.size() > 0)
             {
                 // Add the dispatch time and get a process from the list
                 currentTime += DISP;
@@ -61,7 +61,7 @@ public class FBV extends Algorithm
                     // If a process has finished, move it to the finished list and break to pick a new process
                     if (currentProcess.getRemainingTime() == 0)
                     {
-                        unfinishedProcesses.remove(currentProcess);
+                        ready.remove(currentProcess);
                         processQueues.get(nextProcessQueueIndex).remove(currentProcess);
                         finishedProcesses.add(currentProcess);
                         break;
@@ -145,7 +145,7 @@ public class FBV extends Algorithm
     /**
      * Overridden addNewProcesses method, as the FBV algorithm requires processes to be in four queues. The only
      * difference is that new processes also get added to the first queue in the processQueues list in addition
-     * to unfinishedProcesses
+     * to ready
      */
     @Override protected void addNewProcesses()
     {
@@ -153,7 +153,7 @@ public class FBV extends Algorithm
         while ((upcomingProcessList.size() > 0) && (upcomingProcessList.get(0).getArrive() <= currentTime))
         {
             p = upcomingProcessList.get(0);
-            unfinishedProcesses.add(p);
+            ready.add(p);
             processQueues.get(0).add(p);  // Add to the first, highest priority, queue
             upcomingProcessList.remove(p);
         }
