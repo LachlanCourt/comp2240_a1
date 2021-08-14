@@ -179,12 +179,14 @@ public class A1
                 // Sort the process list, in case the file is out of order. Ugly incoming :$
                 // First sort by arrival time, an earlier arrival time comes before, later arrival time comes after
                 // In the case of two processes with the same arrival time, use the process ID as a tiebreaker.
+                // clang-format off
                 Collections.sort(processes, (a, b) -> {
                     int i = a.getArrive() < b.getArrive()    ? -1
                             : a.getArrive() == b.getArrive() ? a.getIntID() < b.getIntID() ? -1 : 1
                                                              : 1;
                     return i;
                 });
+                // clang-format on
                 // Create a new config object with the data read from the file and return it
                 Config data = new Config(processes, randomValues, DISP);
                 return data;

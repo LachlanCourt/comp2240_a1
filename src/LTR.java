@@ -29,42 +29,50 @@ public class LTR extends Algorithm
         Process currentProcess;
         addNewProcesses();
         // Loop while there are unfinished processes
-        while (unfinishedProcesses.size() > 0)
+        while (finishedProcesses.size() < totalProcesses.size())
         {
-            // Add the dispatch time and get a process from the list
-            currentTime += DISP;
-            int nextProcessIndex = getNextProcess();
-            currentProcess = unfinishedProcesses.get(nextProcessIndex);
-            // Record the time the algorithm started working on this process
-            int startTime = currentTime;
-            // Loop while the current process has not reached its allocated time quanta (hard coded 4 timesteps)
-            while (currentTime - startTime < 4)
+            if (unfinishedProcesses.size() > 0)
             {
-                // Increment the global time and decrement the time left on the current process
-                currentTime++;
-                currentProcess.decRemainingTime();
-                // Check for any processes that have arrived in the meantime
-                addNewProcesses();
-                // If a process has finished, move it to the finished list and break to pick a new process
-                if (currentProcess.getRemainingTime() == 0)
+                // Add the dispatch time and get a process from the list
+                currentTime += DISP;
+                int nextProcessIndex = getNextProcess();
+                currentProcess = unfinishedProcesses.get(nextProcessIndex);
+                // Record the time the algorithm started working on this process
+                int startTime = currentTime;
+                // Loop while the current process has not reached its allocated time quanta (hard coded 4 timesteps)
+                while (currentTime - startTime < 4)
+                {
+                    // Increment the global time and decrement the time left on the current process
+                    currentTime++;
+                    currentProcess.decRemainingTime();
+                    // Check for any processes that have arrived in the meantime
+                    addNewProcesses();
+                    // If a process has finished, move it to the finished list and break to pick a new process
+                    if (currentProcess.getRemainingTime() == 0)
+                    {
+                        unfinishedProcesses.remove(currentProcess);
+                        finishedProcesses.add(currentProcess);
+                        break;
+                    }
+                }
+                // Whether the event finished or was interrupted, generate a new ProcessEvent and add the time it spent
+                // processing
+                ProcessEvent event = new ProcessEvent(startTime, currentTime, currentProcess.getId());
+                // Add the event to the process's processHistory list and the algorithm's processEventRecord list
+                currentProcess.addEvent(event);
+                processEventRecord.add(event);
+
+                // If the process has not finished processing, move process to back of the list
+                if (currentProcess.getRemainingTime() != 0)
                 {
                     unfinishedProcesses.remove(currentProcess);
-                    finishedProcesses.add(currentProcess);
-                    break;
+                    unfinishedProcesses.add(currentProcess);
                 }
             }
-            // Whether the event finished or was interrupted, generate a new ProcessEvent and add the time it spent
-            // processing
-            ProcessEvent event = new ProcessEvent(startTime, currentTime, currentProcess.getId());
-            // Add the event to the process's processHistory list and the algorithm's processEventRecord list
-            currentProcess.addEvent(event);
-            processEventRecord.add(event);
-
-            // If the process has not finished processing, move process to back of the list
-            if (currentProcess.getRemainingTime() != 0)
+            else
             {
-                unfinishedProcesses.remove(currentProcess);
-                unfinishedProcesses.add(currentProcess);
+                currentTime++;
+                addNewProcesses();
             }
         }
     }

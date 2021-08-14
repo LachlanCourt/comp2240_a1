@@ -16,4 +16,4 @@ jobs:
     - name: make
       run: cd src && javac A1.java
     - name: run
-      run: cd src && java A1 datafile1.txt
+      run: cd src && java A1 data/datafile1.txt
