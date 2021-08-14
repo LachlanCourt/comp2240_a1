@@ -27,7 +27,7 @@ public abstract class Algorithm
     /**
      * Gets the index of the next process (or process queue in the case of FBV) that is due to be run
      * @return the index of the next process to be run
-     * Precondition: addNewProcesses must have run to ensure that there are processes in unfinishedProcesses
+     * Precondition: addNewProcesses must have run to ensure that there are processes in ready
      * Postcondition: Return value
      */
     protected abstract int getNextProcess();
