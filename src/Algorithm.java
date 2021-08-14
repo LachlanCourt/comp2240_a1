@@ -18,7 +18,7 @@ public abstract class Algorithm
     // Member variables by all algorithms
     protected ArrayList<Process> upcomingProcessList;
     protected ArrayList<Process> totalProcesses;
-    protected ArrayList<Process> ready = new ArrayList<>();
+    protected ArrayList<Process> readyProcesses = new ArrayList<>();
     protected ArrayList<Process> finishedProcesses = new ArrayList<>();
     protected ArrayList<ProcessEvent> processEventRecord = new ArrayList<>();
     protected int currentTime;
@@ -138,7 +138,7 @@ public abstract class Algorithm
         {
             // Grab the process out and move it from upcomingProcessList to ready
             Process p = upcomingProcessList.get(0);
-            ready.add(p);
+            readyProcesses.add(p);
             upcomingProcessList.remove(p);
         }
     }
