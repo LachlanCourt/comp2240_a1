@@ -44,9 +44,9 @@ public class FBV extends Algorithm
         {
             if (readyProcesses.size() > 0)
             {
-                // Add the dispatch time and get a process from the list
-                currentTime += DISP;
+                // Get a process from the list and add the dispatch time
                 int nextProcessQueueIndex = getNextProcess();
+                currentTime += DISP;
                 currentProcess = processQueues.get(nextProcessQueueIndex).poll();
                 // Record the time the algorithm started working on this process
                 int startTime = currentTime;

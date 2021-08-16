@@ -27,9 +27,9 @@ public class SRT extends Algorithm
         {
             if (readyProcesses.size() > 0)
             {
-                // Add the dispatch time and get a process from the list
-                currentTime += DISP;
+                // Get a process from the list and add the dispatch time
                 int nextProcessIndex = getNextProcess();
+                currentTime += DISP;
                 currentProcess = readyProcesses.get(nextProcessIndex);
                 // Record the time the algorithm started working on this process
                 int startTime = currentTime;
