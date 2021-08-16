@@ -27,9 +27,9 @@ public class FCFS extends Algorithm
         {
             if (readyProcesses.size() > 0)
             {
-                // Add the dispatch time and get a process from the list
-                currentTime += DISP;
+                // Get a process from the list and add the dispatch time
                 currentProcess = readyProcesses.get(getNextProcess());
+                currentTime += DISP;
                 // Generate a new ProcessEvent and add the entire remaining time. FCFS algorithm does not timeout
                 // processes So we can assume that it will continue processing until it is complete
                 ProcessEvent event = new ProcessEvent(currentTime,
